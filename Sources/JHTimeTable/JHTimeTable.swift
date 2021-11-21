@@ -1,6 +1,12 @@
-public struct JHTimeTable {
-    public private(set) var text = "Hello, World!"
+import SwiftUI
 
-    public init() {
+
+public struct JHTimeTable : View {
+    
+    public var body: some View {
+        ZStack{
+            
+        }
     }
+    
 }
