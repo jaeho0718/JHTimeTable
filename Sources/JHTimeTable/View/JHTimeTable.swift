@@ -11,8 +11,16 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
     @Environment(\.timetableCornerRadius) var cornerRadius
     @Environment(\.timetableWeekFont) var weekFont
     @Environment(\.timetableTimeFont) var timeFont
+    @Environment(\.timetableWeekColor) var weekColor
+    @Environment(\.timetableTimeColor) var timeColor
     
     @Binding var resources : [Resource]
+    
+    let lineColor : Color
+    
+    let lineWidth : CGFloat
+    
+    var onTapAction : (Resource) -> Void
     
     var gridItem : [GridItem] {
         var items = [GridItem]()
@@ -24,9 +32,17 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
     }
     
     /// JHTimeTable
+    /// - Parameter lineColor : 시간표 색상 (기본값 : secondary color)
+    /// - Parameter lineWidth : 시간표 선 두께 (기본값 : 1)
     /// - Parameter resources : 시간표에 표시될 수업데이터입니다. ClassProtocol을 채택해야합니다.
-    public init( resources : Binding<[Resource]> ) {
+    public init(lineColor : Color = .secondary,
+                lineWidth : CGFloat = 1
+                ,resources : Binding<[Resource]>
+                ,onTapAction : @escaping (Resource) -> Void = {_ in }) {
         self._resources = resources
+        self.lineColor = lineColor
+        self.lineWidth = lineWidth
+        self.onTapAction = onTapAction
     }
     
     var infoBar : some View {
@@ -36,6 +52,7 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
                     Text(Calendar.current.shortWeekdaySymbols[index.calendarIndex])
                         .frame(maxWidth:.infinity)
                         .font(weekFont)
+                        .foregroundColor(weekColor)
                 }
             }.frame(height:weekHeight)
             .padding(.leading,timeWidth)
@@ -46,6 +63,7 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
                         .frame(width:timeWidth - 2,
                                height:tableHeight,alignment:.topTrailing)
                         .font(timeFont)
+                        .foregroundColor(timeColor)
                 }
             }.padding(.top,weekHeight)
         }
@@ -53,37 +71,13 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
     
     public var body: some View {
         TimetableShape(week: week, tableHeight: tableHeight, weekHeight: weekHeight, timeWidth: timeWidth, minTime: minTime, maxTime: maxTime)
-            .stroke(lineWidth: 1)
+            .stroke(lineWidth: lineWidth)
             .frame(height:weekHeight + tableHeight * CGFloat(maxTime - minTime + 1))
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: cornerRadius < 24 ? cornerRadius : 23)
+                        .stroke(lineWidth: lineWidth))
+            .foregroundColor(lineColor)
             .overlay(infoBar)
-            .opacity(0.3)
-            .overlay(TimetableWeeks(data: $resources).clipped())
+            .overlay(TimetableWeeks(data: $resources, onTapAction: onTapAction).clipped())
     }
     
-}
-
-struct JHTimeTable_Preview : PreviewProvider {
-    static var previews : some View {
-        JHTimeTable(resources: .constant([
-            TestClassModel(id : 0,title: "Math", room: "210", color: "FF5151",
-                           times: [
-                            TestTimeModel(id: 0,
-                                          week: .Mon,
-                                          start: Date.testStartTime,
-                                          end: Date.testStartTime.addingTimeInterval(5400)),
-                            TestTimeModel(id: 1,
-                                          week: .Wed,
-                                          start: Date.testStartTime.addingTimeInterval(-1800),
-                                          end: Date.testStartTime.addingTimeInterval(1800))
-                           ])
-        ]))
-        .frame(width:300)
-        .environment(\.timetableWeek, [.Mon,.Tue,.Wed,.Thu,.Fri])
-        .environment(\.timetableWeekHeight, 25)
-        .environment(\.timetableCornerRadius, 10)
-        .environment(\.timetableMaxTime, 17)
-        .environment(\.timetableMinTime, 9)
-    }
 }

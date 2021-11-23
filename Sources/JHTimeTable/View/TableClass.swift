@@ -17,13 +17,14 @@ struct TimetableClassStack<ClassResource : ClassProtocol,
     
     var classData : ClassResource
     var timeData : TimeResource
+    var onTapAction : (ClassResource) -> Void
     
     var body : some View {
         VStack(alignment:.center,spacing:0){
             Rectangle()
                 .frame(height:preceedTimeHeight())
                 .hidden()
-            TimetableClassCell(data: classData)
+            TimetableClassCell(data: classData,onTapAction: onTapAction)
                 .frame(height:selfTimeHeight(),alignment: .topLeading)
             Rectangle()
                 .hidden()
@@ -64,6 +65,7 @@ struct TimetableClassCell<ClassResource : ClassProtocol> : View {
     @Environment(\.timetableRoomFont) var roomFont
     
     var data : ClassResource
+    var onTapAction : (ClassResource) -> Void
     
     var body : some View {
         ZStack(alignment:.topLeading){
@@ -72,12 +74,17 @@ struct TimetableClassCell<ClassResource : ClassProtocol> : View {
             VStack(alignment:.leading){
                 Text(data.title)
                     .font(classFont)
+                    .foregroundColor(.white)
                 if let room = data.room {
                     Text(room)
                         .font(roomFont)
+                        .foregroundColor(.white)
                 }
             }
             .padding([.leading,.top],2)
         }.frame(maxWidth:.infinity,maxHeight: .infinity)
+            .onTapGesture {
+                onTapAction(data)
+            }
     }
 }

@@ -13,11 +13,12 @@ struct TimetableWeeks<ClassResource : ClassProtocol> : View {
     @Environment(\.timetableWeek) var week
     
     @Binding var data : [ClassResource]
+    var onTapAction : (ClassResource) -> Void
     
     var body : some View {
         HStack(spacing:0){
             ForEach(generateWeekGroup()){ item in
-                TimetableWeekStack(data: item)
+                TimetableWeekStack(data: item,onTapAction: onTapAction)
                     .frame(maxWidth:.infinity,maxHeight:.infinity)
             }
         }
@@ -41,13 +42,15 @@ struct TimetableWeeks<ClassResource : ClassProtocol> : View {
 struct TimetableWeekStack<ClassResource : ClassProtocol> : View {
     
     var data : WeekClassGroup<ClassResource>
+    var onTapAction : (ClassResource) -> Void
     
     var body : some View{
         GeometryReader{ geometry in
             ZStack(alignment:.top){
                 ForEach(data.data){ classData in
                     ForEach(classData.times.filter({$0.week == data.week})){ time in 
-                        TimetableClassStack(classData: classData, timeData: time)
+                        TimetableClassStack(classData: classData, timeData: time,
+                                            onTapAction: onTapAction)
                     }
                 }
             }
