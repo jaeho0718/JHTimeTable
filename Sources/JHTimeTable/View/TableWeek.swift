@@ -46,7 +46,7 @@ struct TimetableWeekStack<ClassResource : ClassProtocol> : View {
         GeometryReader{ geometry in
             ZStack(alignment:.top){
                 ForEach(data.data){ classData in
-                    ForEach(classData.times){ time in 
+                    ForEach(classData.times.filter({$0.week == data.week})){ time in 
                         TimetableClassStack(classData: classData, timeData: time)
                     }
                 }

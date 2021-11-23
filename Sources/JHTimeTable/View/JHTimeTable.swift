@@ -72,7 +72,11 @@ struct JHTimeTable_Preview : PreviewProvider {
                             TestTimeModel(id: 0,
                                           week: .Mon,
                                           start: Date.testStartTime,
-                                          end: Date.testStartTime.addingTimeInterval(5400))
+                                          end: Date.testStartTime.addingTimeInterval(5400)),
+                            TestTimeModel(id: 1,
+                                          week: .Wed,
+                                          start: Date.testStartTime.addingTimeInterval(-1800),
+                                          end: Date.testStartTime.addingTimeInterval(1800))
                            ])
         ]))
         .frame(width:300)
