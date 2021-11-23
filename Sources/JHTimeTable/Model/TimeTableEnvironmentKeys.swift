@@ -69,6 +69,10 @@ struct TimetableTimeColor : EnvironmentKey {
     static var defaultValue : Color = .secondary
 }
 
+struct TimetableCellOpacity : EnvironmentKey {
+    static var defaultValue : Double = 1.0
+}
+
 public extension EnvironmentValues {
     
     ///시간표에 표시될 주일
@@ -148,5 +152,10 @@ public extension EnvironmentValues {
     var timetableTimeColor : Color {
         get { self[TimetableTimeColor.self] }
         set { self[TimetableTimeColor.self] = newValue }
+    }
+    
+    var timetableCellOpacity : Double {
+        get { self[TimetableCellOpacity.self] }
+        set { self[TimetableCellOpacity.self] = newValue }
     }
 }

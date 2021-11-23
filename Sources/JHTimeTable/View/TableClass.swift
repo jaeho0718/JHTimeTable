@@ -63,6 +63,7 @@ struct TimetableClassStack<ClassResource : ClassProtocol,
 struct TimetableClassCell<ClassResource : ClassProtocol> : View {
     @Environment(\.timetableClassFont) var classFont
     @Environment(\.timetableRoomFont) var roomFont
+    @Environment(\.timetableCellOpacity) var opacity
     
     var data : ClassResource
     var onTapAction : (ClassResource) -> Void
@@ -71,6 +72,7 @@ struct TimetableClassCell<ClassResource : ClassProtocol> : View {
         ZStack(alignment:.topLeading){
             Rectangle()
                 .foregroundColor(Color(hexString: data.color))
+                .opacity(opacity)
             VStack(alignment:.leading){
                 Text(data.name)
                     .font(classFont)
