@@ -59,7 +59,7 @@ struct TimetableWeekHeight : EnvironmentKey {
     static var defaultValue : CGFloat = 15
 }
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
     
     var timetableWeek : [ClassWeekType] {
         get { self[TimetableWeekEnvironmentKey.self] }
@@ -104,5 +104,15 @@ extension EnvironmentValues {
     var timetableTimeFont : Font {
         get { self[TimetableTimeFontEnvironmentKey.self] }
         set { self[TimetableTimeFontEnvironmentKey.self] = newValue }
+    }
+    
+    var timetableClassFont : Font {
+        get { self[TimetableClassFontEnvironmentKey.self] }
+        set { self[TimetableClassFontEnvironmentKey.self] = newValue }
+    }
+    
+    var timetableRoomFont : Font {
+        get { self[TimetableRoomFontEnvironmentKey.self] }
+        set { self[TimetableRoomFontEnvironmentKey.self] = newValue }
     }
 }

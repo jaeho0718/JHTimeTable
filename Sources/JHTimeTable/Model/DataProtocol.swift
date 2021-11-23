@@ -8,7 +8,7 @@
 import Foundation
 
 ///수업 시간을 나타내는데 채택할 시간프로토콜입니다.
-public protocol ClassTimeProtocol {
+public protocol ClassTimeProtocol : Identifiable{
     
     /// 주일
     ///
@@ -31,7 +31,7 @@ public protocol ClassTimeProtocol {
 /// - room : 강의실
 /// - color : 시간표에 표시될 색상 (16진수 코드)
 /// - times : 강의 시간에 대한 정보
-public protocol ClassProtocol {
+public protocol ClassProtocol : Identifiable {
     
     associatedtype TimeItem : ClassTimeProtocol
     

@@ -30,7 +30,7 @@ public enum ClassWeekType : Identifiable{
         case .Sat:
             return 6
         case .Sun:
-            return 7
+            return 0
         }
     }
     
@@ -49,8 +49,17 @@ public enum ClassWeekType : Identifiable{
         case .Sat:
             return 6
         case .Sun:
-            return 7
+            return 0
         }
     }
     
+}
+
+struct WeekClassGroup<Resource : ClassProtocol> : Identifiable {
+    var week : ClassWeekType
+    var data : [Resource]
+    
+    var id : Int {
+        week.id
+    }
 }

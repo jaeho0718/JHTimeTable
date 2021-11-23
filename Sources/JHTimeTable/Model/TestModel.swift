@@ -8,6 +8,8 @@
 import Foundation
 
 struct TestClassModel : ClassProtocol {
+    var id : Int
+    
     var title: String
     
     var room: String?
@@ -18,6 +20,8 @@ struct TestClassModel : ClassProtocol {
 }
 
 struct TestTimeModel : ClassTimeProtocol {
+    var id : Int
+    
     var week: ClassWeekType
     
     var start: Date

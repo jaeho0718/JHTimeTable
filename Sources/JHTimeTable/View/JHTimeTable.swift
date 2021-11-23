@@ -1,6 +1,6 @@
 import SwiftUI
 
-
+///JHTimeTable
 public struct JHTimeTable<Resource : ClassProtocol> : View {
     @Environment(\.timetableWeek) var week
     @Environment(\.timetableTimeWidth) var timeWidth
@@ -29,11 +29,11 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
         self._resources = resources
     }
     
-    var weekBar : some View {
+    var infoBar : some View {
         ZStack(alignment:.topLeading){
             HStack(spacing:0){
                 ForEach(week){ index in
-                    Text(Calendar.current.veryShortWeekdaySymbols[index.calendarIndex])
+                    Text(Calendar.current.shortWeekdaySymbols[index.calendarIndex])
                         .frame(maxWidth:.infinity)
                         .font(weekFont)
                 }
@@ -48,8 +48,7 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
                         .font(timeFont)
                 }
             }.padding(.top,weekHeight)
-            
-        }.frame(maxWidth:.infinity,maxHeight:.infinity,alignment: .topLeading)
+        }
     }
     
     public var body: some View {
@@ -58,8 +57,9 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
             .frame(height:weekHeight + tableHeight * CGFloat(maxTime - minTime + 1))
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(lineWidth: 1))
-            .overlay(weekBar)
+            .overlay(infoBar)
             .opacity(0.3)
+            .overlay(TimetableWeeks(data: $resources).clipped())
     }
     
 }
@@ -67,62 +67,19 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
 struct JHTimeTable_Preview : PreviewProvider {
     static var previews : some View {
         JHTimeTable(resources: .constant([
-            TestClassModel(title: "Math", room: "210", color: "",
+            TestClassModel(id : 0,title: "Math", room: "210", color: "FF5151",
                            times: [
-                            TestTimeModel(week: .Mon,
-                                          start: Date(),
-                                          end: Date().addingTimeInterval(3600))
+                            TestTimeModel(id: 0,
+                                          week: .Mon,
+                                          start: Date.testStartTime,
+                                          end: Date.testStartTime.addingTimeInterval(5400))
                            ])
         ]))
         .frame(width:300)
         .environment(\.timetableWeek, [.Mon,.Tue,.Wed,.Thu,.Fri])
         .environment(\.timetableWeekHeight, 25)
         .environment(\.timetableCornerRadius, 10)
-        .environment(\.timetableMaxTime, 20)
+        .environment(\.timetableMaxTime, 17)
+        .environment(\.timetableMinTime, 9)
     }
-}
-
-struct TimetableShape : Shape {
-    
-    var week : [ClassWeekType]
-    var tableHeight : CGFloat
-    var weekHeight : CGFloat
-    var timeWidth : CGFloat
-    var minTime : Int
-    var maxTime : Int
-    
-    func path(in rect: CGRect) -> Path {
-        let weekWidth = (rect.width - timeWidth)/CGFloat(week.count)
-        
-        return Path { path in
-            
-            path.move(to: CGPoint(x: 0,
-                                  y: weekHeight))
-            
-            path.addLine(to: CGPoint(x: timeWidth + weekWidth * CGFloat(week.count),
-                                     y: weekHeight))
-            
-            for yindex in 1 ..< maxTime - minTime + 1 {
-                path.move(to: CGPoint(x: 0,
-                                      y: weekHeight + tableHeight * CGFloat(yindex) ))
-                
-                path.addLine(to: CGPoint(x: timeWidth + weekWidth * CGFloat(week.count),
-                                      y: weekHeight + tableHeight * CGFloat(yindex) ))
-            }
-            
-            path.move(to: CGPoint(x: timeWidth,
-                                  y: 0))
-            
-            path.addLine(to: CGPoint(x: timeWidth,
-                                     y: weekHeight + tableHeight * CGFloat(maxTime - minTime + 1)))
-            
-            for xindex in 1 ..< week.count {
-                path.move(to: CGPoint(x: timeWidth + weekWidth * CGFloat(xindex),
-                                      y: 0))
-                path.addLine(to: CGPoint(x: timeWidth + weekWidth * CGFloat(xindex),
-                                         y: weekHeight + tableHeight * CGFloat(maxTime - minTime + 1)))
-            }
-        }
-    }
-    
 }
