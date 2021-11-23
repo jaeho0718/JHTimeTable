@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TestClassModel : ClassProtocol {
+struct ExampleClassModel : ClassProtocol {
     var id : Int
     
     var title: String
@@ -16,10 +16,10 @@ struct TestClassModel : ClassProtocol {
     
     var color: String
     
-    var times: [TestTimeModel]
+    var times: [ExampleTimeModel]
 }
 
-struct TestTimeModel : ClassTimeProtocol {
+struct ExampleTimeModel : ClassTimeProtocol {
     var id : Int
     
     var week: ClassWeekType
