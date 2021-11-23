@@ -29,7 +29,7 @@ struct TimetableWeeks<ClassResource : ClassProtocol> : View {
     private func generateWeekGroup() -> [WeekClassGroup<ClassResource>] {
         var groups = [WeekClassGroup<ClassResource>]()
         for item in week {
-            let classes = data.filter({$0.times.contains(where: {$0.week == item})})
+            let classes = data.filter({$0.times.contains(where: {$0.weekday == item})})
             // sort 추가하기
             groups.append(.init(week: item,
                                 data: classes))
@@ -48,7 +48,7 @@ struct TimetableWeekStack<ClassResource : ClassProtocol> : View {
         GeometryReader{ geometry in
             ZStack(alignment:.top){
                 ForEach(data.data){ classData in
-                    ForEach(classData.times.filter({$0.week == data.week})){ time in 
+                    ForEach(classData.times.filter({$0.weekday == data.week})){ time in 
                         TimetableClassStack(classData: classData, timeData: time,
                                             onTapAction: onTapAction)
                     }

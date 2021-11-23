@@ -11,48 +11,48 @@ import SwiftUI
 struct JHTimeTableExampleView : View {
     
     var resources : [ExampleClassModel] = [
-        ExampleClassModel(id : 0,title: "Math", room: "210", color: "3F3351",
+        ExampleClassModel(id : 0,name: "Math", room: "210", color: "3F3351",
                        times: [
                         ExampleTimeModel(id: 0,
-                                      week: .Mon,
-                                      start: Date.testStartTime,
-                                      end: Date.testStartTime.addingTimeInterval(5400)),
+                                         weekday: .Mon,
+                                         start: Date.testStartTime,
+                                         end: Date.testStartTime.addingTimeInterval(5400)),
                         ExampleTimeModel(id: 1,
-                                      week: .Wed,
-                                      start: Date.testStartTime.addingTimeInterval(-3600),
-                                      end: Date.testStartTime.addingTimeInterval(1800))
+                                         weekday: .Wed,
+                                         start: Date.testStartTime.addingTimeInterval(-3600),
+                                         end: Date.testStartTime.addingTimeInterval(1800))
                        ]),
-        ExampleClassModel(id : 1,title: "Science", room: nil, color: "FF5151",
+        ExampleClassModel(id : 1,name: "Science", room: nil, color: "FF5151",
                        times: [
                         ExampleTimeModel(id: 0,
-                                      week: .Mon,
-                                      start: Date.testStartTime.addingTimeInterval(-5600),
-                                      end: Date.testStartTime.addingTimeInterval(-2500)),
+                                         weekday: .Mon,
+                                         start: Date.testStartTime.addingTimeInterval(-5600),
+                                         end: Date.testStartTime.addingTimeInterval(-2500)),
                         ExampleTimeModel(id: 1,
-                                      week: .Fri,
-                                      start: Date.testStartTime.addingTimeInterval(-3600),
-                                      end: Date.testStartTime.addingTimeInterval(1800)),
+                                         weekday: .Fri,
+                                         start: Date.testStartTime.addingTimeInterval(-3600),
+                                         end: Date.testStartTime.addingTimeInterval(1800)),
                         ExampleTimeModel(id: 1,
-                                      week: .Thu,
-                                      start: Date.testStartTime.addingTimeInterval(1800),
-                                      end: Date.testStartTime.addingTimeInterval(7200))
+                                         weekday: .Thu,
+                                         start: Date.testStartTime.addingTimeInterval(1800),
+                                         end: Date.testStartTime.addingTimeInterval(7200))
                        ]),
-        ExampleClassModel(id : 2,title: "Computer", room: "컴퓨터실", color: "9C19E0",
+        ExampleClassModel(id : 2,name: "Computer", room: "컴퓨터실", color: "9C19E0",
                        times: [
                         ExampleTimeModel(id: 0,
-                                      week: .Tue,
-                                      start: Date.testStartTime.addingTimeInterval(-5600),
-                                      end: Date.testStartTime.addingTimeInterval(2500)),
+                                         weekday: .Tue,
+                                         start: Date.testStartTime.addingTimeInterval(-5600),
+                                         end: Date.testStartTime.addingTimeInterval(2500)),
                         ExampleTimeModel(id: 1,
-                                      week: .Thu,
-                                      start: Date.testStartTime.addingTimeInterval(-7200),
-                                      end: Date.testStartTime.addingTimeInterval(-1800))
+                                         weekday: .Thu,
+                                         start: Date.testStartTime.addingTimeInterval(-7200),
+                                         end: Date.testStartTime.addingTimeInterval(-1800))
                        ]),
-        ExampleClassModel(id : 2,title: "Logic", room: "컴퓨터실", color: "105652",
+        ExampleClassModel(id : 2,name: "Logic", room: "컴퓨터실", color: "105652",
                        times: [
                         ExampleTimeModel(id: 0,
-                                      week: .Wed,
-                                      start: Date.testStartTime.addingTimeInterval(-3600*4),
+                                         weekday: .Wed,
+                                         start: Date.testStartTime.addingTimeInterval(-3600*4),
                                          end: Date.testStartTime.addingTimeInterval(-3800))
                        ])
     ]

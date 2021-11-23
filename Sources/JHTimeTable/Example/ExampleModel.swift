@@ -10,7 +10,7 @@ import Foundation
 struct ExampleClassModel : ClassProtocol {
     var id : Int
     
-    var title: String
+    var name: String
     
     var room: String?
     
@@ -22,7 +22,7 @@ struct ExampleClassModel : ClassProtocol {
 struct ExampleTimeModel : ClassTimeProtocol {
     var id : Int
     
-    var week: ClassWeekType
+    var weekday: ClassWeekType
     
     var start: Date
     

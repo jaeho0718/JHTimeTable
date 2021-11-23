@@ -72,7 +72,7 @@ struct TimetableClassCell<ClassResource : ClassProtocol> : View {
             Rectangle()
                 .foregroundColor(Color(hexString: data.color))
             VStack(alignment:.leading){
-                Text(data.title)
+                Text(data.name)
                     .font(classFont)
                     .foregroundColor(.white)
                 if let room = data.room {

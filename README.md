@@ -27,7 +27,7 @@ SwiftUI Customizable School TimeTable Library
         associatedtype TimeItem : ClassTimeProtocol
     
         /// 강의명
-        var title : String { get set }
+        var name : String { get set }
     
         /// 강의실
         var room : String? { get set }
@@ -49,7 +49,7 @@ SwiftUI Customizable School TimeTable Library
         /// 주일
         ///
         /// 시간표에 주일이 표시될 때는 자동으로 지역화되어 표시됩니다.
-        var week : ClassWeekType { get set }
+        var weekday : ClassWeekType { get set }
     
         /// 시작되는 시간
         ///
