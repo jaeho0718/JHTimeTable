@@ -66,7 +66,7 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
                         .foregroundColor(timeColor)
                 }
             }.padding(.top,weekHeight)
-        }
+        }.frame(maxWidth:.infinity,maxHeight: .infinity,alignment: .topLeading)
     }
     
     public var body: some View {

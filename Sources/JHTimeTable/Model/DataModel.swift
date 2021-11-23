@@ -15,7 +15,7 @@ import Foundation
 public enum ClassWeekType : Int,Identifiable,Codable{
     case Mon,Tue,Wed,Thu,Fri,Sat,Sun
     
-    var rawValue : Int {
+    public var rawValue : Int {
         switch self {
         case .Mon:
             return 1
