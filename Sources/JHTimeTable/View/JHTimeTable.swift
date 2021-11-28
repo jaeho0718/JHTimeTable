@@ -49,10 +49,17 @@ public struct JHTimeTable<Resource : ClassProtocol> : View {
         ZStack(alignment:.topLeading){
             HStack(spacing:0){
                 ForEach(week){ index in
+                    #if os(watchOS)
+                    Text(Calendar.current.veryShortWeekdaySymbols[index.calendarIndex])
+                        .frame(maxWidth:.infinity)
+                        .font(weekFont)
+                        .foregroundColor(weekColor)
+                    #else
                     Text(Calendar.current.shortWeekdaySymbols[index.calendarIndex])
                         .frame(maxWidth:.infinity)
                         .font(weekFont)
                         .foregroundColor(weekColor)
+                    #endif
                 }
             }.frame(height:weekHeight)
             .padding(.leading,timeWidth)
