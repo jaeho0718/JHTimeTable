@@ -7,72 +7,73 @@
 
 import SwiftUI
 
-///JHTimeTable을 이용한 예제입니다.
+/// Example
 struct JHTimeTableExampleView : View {
     
-    var resources : [ExampleClassModel] = [
+    @State var resources : [ExampleClassModel] = [
         ExampleClassModel(id : 0,name: "Math", room: "210", color: "3F3351",
                        times: [
                         ExampleTimeModel(id: 0,
                                          weekday: .Mon,
-                                         start: Date.testStartTime,
-                                         end: Date.testStartTime.addingTimeInterval(5400)),
+                                         start: .testTime1,
+                                         end: .testTime1.addingTimeInterval(3600)),
                         ExampleTimeModel(id: 1,
                                          weekday: .Wed,
-                                         start: Date.testStartTime.addingTimeInterval(-3600),
-                                         end: Date.testStartTime.addingTimeInterval(1800))
+                                         start: .testTime2,
+                                         end: .testTime2.addingTimeInterval(3600))
                        ]),
         ExampleClassModel(id : 1,name: "Science", room: nil, color: "FF5151",
                        times: [
                         ExampleTimeModel(id: 0,
                                          weekday: .Mon,
-                                         start: Date.testStartTime.addingTimeInterval(-5600),
-                                         end: Date.testStartTime.addingTimeInterval(-2500)),
+                                         start: .testTime3,
+                                         end: .testTime3.addingTimeInterval(3600)),
                         ExampleTimeModel(id: 1,
                                          weekday: .Fri,
-                                         start: Date.testStartTime.addingTimeInterval(-3600),
-                                         end: Date.testStartTime.addingTimeInterval(1800)),
+                                         start: .testTime2,
+                                         end: .testTime2.addingTimeInterval(3600)),
                         ExampleTimeModel(id: 1,
                                          weekday: .Thu,
-                                         start: Date.testStartTime.addingTimeInterval(1800),
-                                         end: Date.testStartTime.addingTimeInterval(7200))
+                                         start: .testTime2,
+                                         end: .testTime2.addingTimeInterval(3600))
                        ]),
-        ExampleClassModel(id : 2,name: "Computer", room: "컴퓨터실", color: "9C19E0",
+        ExampleClassModel(id : 2,name: "Computer", room: "320", color: "9C19E0",
                        times: [
                         ExampleTimeModel(id: 0,
                                          weekday: .Tue,
-                                         start: Date.testStartTime.addingTimeInterval(-5600),
-                                         end: Date.testStartTime.addingTimeInterval(2500)),
+                                         start: .testTime4,
+                                         end: .testTime4.addingTimeInterval(3600)),
                         ExampleTimeModel(id: 1,
                                          weekday: .Thu,
-                                         start: Date.testStartTime.addingTimeInterval(-7200),
-                                         end: Date.testStartTime.addingTimeInterval(-1800))
+                                         start: .testTime1,
+                                         end: .testTime1.addingTimeInterval(3600))
                        ]),
-        ExampleClassModel(id : 2,name: "Logic", room: "컴퓨터실", color: "105652",
+        ExampleClassModel(id : 2,name: "Logic", room: "120", color: "105652",
                        times: [
                         ExampleTimeModel(id: 0,
                                          weekday: .Wed,
-                                         start: Date.testStartTime.addingTimeInterval(-3600*4),
-                                         end: Date.testStartTime.addingTimeInterval(-3800))
+                                         start: .testTime3,
+                                         end: .testTime3.addingTimeInterval(3600))
                        ])
     ]
     
     var body : some View {
-        JHTimeTable(lineColor:.secondary.opacity(0.3),
-                    lineWidth: 1,
-                    resources: .constant(resources))
-            .frame(width:300) //시간표 넓이 지정
-            .environment(\.timetableWeek, [.Mon,.Tue,.Wed,.Thu,.Fri]) //시간표에 표시될 주일 지정
-            .environment(\.timetableWeekHeight, 20) //시간표 주일 높이 지정
-            .environment(\.timetableCornerRadius, 20) //시간표 테두리 곡률 지정
-            .environment(\.timetableMaxTime, 17) //시간표 최대 시간 지정
-            .environment(\.timetableMinTime, 9) //시간표 시작 시간 지정
-            .environment(\.timetableHeight, 40) //시간표 시간 셀 높이 지정
+        JHTimeTable(lineWidth: 0.5, lineColor: .secondary, cornerRadius: 15,
+                    items: $resources, background: {
+            Color.clear
+        },onTapAction: { value in
+            // TapAction
+        })
+            .tableFrame(timeWidth: 17, timeHeight: 30, weekHeight: 19)
+            .tableFont(week: .caption2, time: .system(size: 9), title: .caption2, room: .caption2)
+            .tableWeeks(weeks: [.Mon,.Tue,.Wed,.Thu,.Fri])
+            .weekType(type: .normal)
+            .frame(width: 300)
     }
 }
 
 
-struct JJHTimeTableExampleView_Preview : PreviewProvider {
+struct JHTimeTableExampleView_Preview : PreviewProvider {
     static var previews : some View {
         JHTimeTableExampleView()
     }

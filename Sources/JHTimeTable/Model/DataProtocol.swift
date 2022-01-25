@@ -7,30 +7,30 @@
 
 import Foundation
 
-///수업 시간을 나타내는데 채택할 시간프로토콜입니다.
-public protocol ClassTimeProtocol : Identifiable{
+/// ClassTime protocol
+public protocol ClassTimeProtocol : Identifiable {
     
-    /// 주일
+    /// weekday
     ///
-    /// 시간표에 주일이 표시될 때는 자동으로 지역화되어 표시됩니다.
+    /// It is automatically localized and displayed at the top of the timetable.
     var weekday : ClassWeekType { get set }
     
-    /// 시작되는 시간
+    /// start time
     ///
-    /// HH : mm 에 대한 정보만 이용합니다.
+    /// HH : mm
     var start : Date { get set }
     
-    /// 끝나는 시간
+    /// end time
     ///
-    /// HH : mm 에 대한 정보만 이용합니다.
+    /// HH : mm
     var end : Date { get set }
 }
 
-///수업 데이터를 JHTimeTable에 바인딩하기 위해 채택해야할 프로토콜입니다.
-/// - title : 강의명
-/// - room : 강의실
-/// - color : 시간표에 표시될 색상 (16진수 코드)
-/// - times : 강의 시간에 대한 정보
+/// ClassInfo protocol
+/// - title : Lecture name
+/// - room : Lecture room
+/// - color : LectureCell background color (hex code)
+/// - times : Lecture time info
 public protocol ClassProtocol : Identifiable {
     
     associatedtype TimeItem : ClassTimeProtocol
