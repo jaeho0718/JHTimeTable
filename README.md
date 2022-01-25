@@ -63,3 +63,4 @@ SwiftUI Customizable School TimeTable Library
     |tableColor|Set timetable week,time font color|
     |weekType|Set timetable week symbol type|
     |tableWeeks|Set timetable weeks|
+    |tableCellOpacity|Set table cell opacity|

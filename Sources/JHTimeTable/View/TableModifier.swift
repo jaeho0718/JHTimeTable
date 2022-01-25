@@ -59,4 +59,11 @@ extension JHTimeTable {
         view.weeks = weeks
         return view
     }
+
+    /// Set table cell opacity
+    public func tableCellOpacity(_ value: Double) -> JHTimeTable {
+        var view = self
+        view.cellOpacity = value
+        return view
+    }
 }
