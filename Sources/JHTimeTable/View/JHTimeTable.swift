@@ -55,12 +55,10 @@ public struct JHTimeTable<Item: ClassProtocol,Content: View>: View {
     }
 
     var backgroundView: some View {
-        GeometryReader { proxy in
-            background()
-                .clipShape(TableCornerShape(weeks: weeks, cornerRadius: cornerRadius,
-                                            timeHeight: timeHeight, weekHeight: weekHeight,
-                                            minTime: minTime, maxTime: maxTime))
-        }
+        background()
+            .clipShape(TableCornerShape(weeks: weeks, cornerRadius: cornerRadius,
+                                        timeHeight: timeHeight, weekHeight: weekHeight,
+                                        minTime: minTime, maxTime: maxTime))
     }
 
     var classesView: some View {
