@@ -85,6 +85,7 @@ public struct JHTimeTable<Item: ClassProtocol,Content: View>: View {
                                                     time: time).height,
                                    alignment: .topLeading)
                             .background(Color(hexString: item.color).opacity(cellOpacity))
+                            .clipped()
                             .position(x: getPosition(width: proxy.size.width,
                                                      time: time, index: index).x,
                                       y: getPosition(width: proxy.size.width,
